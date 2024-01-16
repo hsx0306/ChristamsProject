@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"/>
+    <title>회원가입</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+</head>
+<body>
+
+    <div class="register">
+
+        <h1 class="title">
+            <span style="color: #e02635; font-family: Noto sans KR; font-weight: 900;">산타가</span> <span style="color: #024f1a; font-family: Noto Sans KR; font-weight: 500;">되기까지<br><span style="font-weight: 900;">얼마 남지 않았어요!</span></span>
+        </h1>
+
+
+
+
+        <form id="registerForm">
+            <div class="container">
+                <span class="holder-text">이메일주소<span style="color: #FF5353;">*</span> </span><br>
+                <input name="id" type="text" class="input-holder" placeholder="이메일주소"><br>
+                <span style="display: none;" class="Warning-text Warning-text-email">*이메일 형식이 올바르지 않습니다.</span><br>
+            </div>
+
+            
+            <div class="container">
+                <span  class="holder-text">비밀번호<span style="color: #FF5353;">*</span> </span><br>
+                <input name="password" type="text" class="input-holder" placeholder="비밀번호는 특수문자 포함 8자 이상이여야 합니다."><br>
+                <span style="display: none;" class="Warning-text Warning-text-password">*비밀번호는 특수문자 포함 8자 이상이여야 합니다.</span><br>
+            </div>
+
+            <div class="unique-and-santa-name container">
+                
+                <div class="division">
+                    <span  class="holder-text">고유ID<span style="color: #FF5353;">*</span> </span><br>
+                    <input name="uniqueid" type="text" class="input-holder" placeholder="최대 8자리 숫자, 영어" style="width: 140px;"><br>
+                    <!-- <span class="Warning-text" style="">*최대 6자리 숫자,영어만 가능.</span> -->
+                </div>
+
+                <div class="division">
+                    <span class="holder-text" style="margin: 0 0 0 26px;">산타이름<span style="color: #FF5353;">*</span> </span><br>
+                    <input name="santaName" type="text" class="input-holder" placeholder="최대 3글자 한글" style="width: 140px; margin: 0 0 0 10px"><br>
+                </div>
+
+            </div>
+          
+            <script>
+
+                $('#registerForm').on('submit', function(e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: '/register',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: function(res) {
+                            window.location.href = "/success";
+                                             
+                        },
+
+                        error: function(xhr) {
+                            var error = xhr.responseText;
+                            if(error === 'emailerror') {
+                                $(".Warning-text-email").show();
+                            }
+                            if(error === 'passworderror') {
+                                $(".Warning-text-password").show();
+                            }
+                            
+                        }
+
+                        // statusCode: {
+                        //     200: function() {
+                        //         console.log('Hello');
+                        //     }
+                        // },
+                    });
+                });
+
+            </script>
+
+
+
+
+            
+
+
+
+            <div class="terms" style="margin: 20px 0 0 20px;">
+                
+
+                <label for="agree_all">
+                    <input type="checkbox" name="agree_all" id="agree_all">
+                    <span class="terms-text">모두 동의합니다</span>
+                </label>
+
+                <label for="agree">
+                    <input type="checkbox" name="agree" value="1">
+                    <span class="terms-text">이용약관 동의<strong>(필수)</strong></span>
+                </label>
+
+                <label for="agree">
+                    <input type="checkbox" name="agree" value="2">
+                    <span class="terms-text">개인정보 수집, 이용 동의<strong>(필수)</strong></span>
+                </label>
+
+                <label for="agree">
+                    <input type="checkbox" name="agree" value="3">
+                    <span class="terms-text">개인정보 이용 동의<strong>(필수)</strong></span>
+                </label>
+
+                <label for="agree">
+                    <input type="checkbox" name="agree" value="4">
+                    <span class="terms-text">이벤트, 혜택정보 수신동의<strong class="select_disable">(선택)</strong></span>
+                </label>
+                
+                <script type="text/javascript">
+                    // 동의 모두선택 / 해제
+                    const agreeChkAll = document.querySelector('input[name=agree_all]');
+                        agreeChkAll.addEventListener('change', (e) => {
+                        let agreeChk = document.querySelectorAll('input[name=agree]');
+                        for(let i = 0; i < agreeChk.length; i++){
+                        agreeChk[i].checked = e.target.checked;
+                        }
+                    });
+                </script>
+
+            </div>
+
+            <div class="container">
+                <button class="register-finish-button" type='submit'>선물주러가기 ></button>
+            </div>
+
+        </form>
+
+
+
+
+
+
+
+
+
+        <footer>푸터</footer>
+
+    </div>
+
+</body>
+</html>

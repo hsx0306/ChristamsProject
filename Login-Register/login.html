@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>로그인</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"/>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+
+    <div class="login-body">
+        <h1 class="Main-text">
+            우리 같이
+            <span class="Main-text-color">산타(santa)</span>가<br>되어보는건 어때요?
+        </h1>
+
+
+        <form id="loginForm">
+
+
+            <div class="id-email">
+                <span class="holder-text">ID</span><br>
+                <input name="id" type="text" class="input-holder" placeholder="이메일주소"><br>
+                <span style="display: none;" class="Warning-text-email Warning-text">*이메일 형식이 올바르지 않습니다.</span><br>
+            </div>
+
+            
+            <div class="password">
+                <span class="holder-text">Password</span><br>
+                <input name="password" type="password" class="input-holder" placeholder="비밀번호"><br>
+                <span style="display: none;"class="Warning-text-password Warning-text">*비밀번호 형식이 올바르지 않습니다.</span><br>
+            </div>
+
+            <div class="register"> <a href="/LoginRegister/register">산타등록하러가기</a></div><br>
+
+            <div style="display: none;"class="Warning-login">ID 또는 Password가 올바르지 않습니다.<br>확인후 다시 시도해주십시오.</div><br>
+
+            <button class="Login-button" type='submit' value="로그인" >산타가 되기</button><br>
+
+            <script>
+                $('#loginForm').on('submit', function(e) {
+                    // 
+
+
+                    e.preventDefault();
+                    $(".Warning-text").hide();
+
+
+
+                    $.ajax({
+                        url: '/OauthVerification',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: function(res) {
+                            localStorage.setItem('token', `${res.token}`);
+                            localStorage.setItem('ls', `${res.ls}`);
+                            $(".Warning-text").hide();
+
+                            window.location.href = "/success";
+                            // 리다이렉트 링크
+                        },
+
+                        error: function(xhr) {
+                            
+                            var error = xhr.responseText;
+                            if((error === 'emailerror')) {
+                                $(".Warning-text-email").show();
+                            }
+                            if(error === 'passworderror') {
+                                $(".Warning-text-password").show();
+                            }
+                            // Loginerror
+
+                            if((error === 'SearchError') || (error === 'Loginerror')){
+                                $(".Warning-login").show();
+                            }
+
+                        }
+
+                    });
+                });
+
+
+            </script>
+        </form>
+
+
+        <div class="line"></div>
+
+        <span class="direct-login">간편하게 산타되기</span>
+        
+        <div class="test">
+        <ul class="direct-login-container">
+
+            <li class="naver" id="naverLogin">
+                <div id="naver_id_login" style="display:none;"></div>
+                <div class="Elipse">
+                <img class="Elipse" src="/LoginRegister/login-img/naver_icon.png" alt="">
+
+                <span class="direct-span">네이버</span>
+                </div>
+                <!-- naver_id_login_anchor -->
+            </li>
+            
+            <li class="twitter">
+                <div class="Elipse"></div>
+                <span class="direct-span">트위터</span>
+            </li>
+
+            <li class="instagram">
+                <div class="Elipse"></div>
+                <span class="direct-span">인스타</span>
+
+            </li>
+
+            <li class="google">
+                <div class="Elipse"></div>
+                <span class="direct-span">구글</span>
+            </li>
+
+        </ul>
+        </div>
+
+    </div>
+
+
+    <div>
+        <ul>
+            <li id="GgCustomLogin">
+            <a href="javascript:void(0)">
+            <span>Login with Google</span>
+            </a>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+
+    <script type="text/javascript">
+        var naver_id_login = new naver_id_login("CsybAD9zyeacu13N7a9o", "http://1.242.67.21/OauthVerification/naver"); // login redirect url edit
+        var state = naver_id_login.getUniqState();
+        naver_id_login.setButton("green", 2,40);
+        naver_id_login.setDomain("kvKzWXaXrl");
+        naver_id_login.setState(state);
+        // naver_id_login.setPopup();
+        naver_id_login.init_naver_id_login();
+
+
+        document.getElementById("naverLogin").addEventListener("click", function() {
+            var link = document.getElementById("naver_id_login_anchor");
+            window.location.href = link.href;
+        });
+
+        // $.ajax({
+        //         url: '/OauthVerification/naver',
+        //         type: 'POST',
+        //         // data: {},
+        //         success: function(res) {
+        //             localStorage.setItem('email', `${res.token}`);
+        //             localStorage.setItem('access_token', `${res.ls}`);
+        //             $(".Warning-text").hide();
+
+        //             // window.location.href = "/success";
+        //         },
+
+        //         error: function(xhr) {
+                    
+        //             var error = xhr.responseText;
+        //         }
+        // });
+
+
+
+        // if(error === 'Loginerror') {
+        //     window.location.href = "/LoginRegister/register";
+        //     localStorage.setItem('token', `${res.token}`);
+        //     localStorage.setItem('token', `${res.token}`);
+        // }
+
+
+
+    </script>
+
+
+
+
+
+    <script>
+
+        //처음 실행하는 함수
+        function init() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+                options = new gapi.auth2.SigninOptionsBuilder();
+                options.setPrompt('select_account');
+                // 추가는 Oauth 승인 권한 추가 후 띄어쓰기 기준으로 추가
+                options.setScope('email profile openid https://www.googleapis.com/auth/user.birthday.read');
+                // 인스턴스의 함수 호출 - element에 로그인 기능 추가
+                // GgCustomLogin은 li태그안에 있는 ID, 위에 설정한 options와 아래 성공,실패시 실행하는 함수들
+                gapi.auth2.getAuthInstance().attachClickHandler('GgCustomLogin', options, onSignIn, onSignInFailure);
+            })
+        }
+        
+        function onSignIn(googleUser) {
+            var access_token = googleUser.getAuthResponse().access_token
+            $.ajax({
+                // people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
+                url: 'https://people.googleapis.com/v1/people/me'
+                // key에 자신의 API 키를 넣습니다.
+                , data: {personFields:'birthdays', key:'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', 'access_token': access_token}
+                , method:'GET'
+            })
+            .done(function(e){
+                //프로필을 가져온다.
+                var profile = googleUser.getBasicProfile();
+                console.log(profile)
+            })
+            .fail(function(e){
+                console.log(e);
+            })
+        }
+        function onSignInFailure(t){		
+            console.log(t);
+        }
+    </script>
+
+
+
+
+
+</body>
+</html>

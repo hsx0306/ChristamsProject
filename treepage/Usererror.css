@@ -1,0 +1,138 @@
+body {
+    flex-grow: 0;
+    background-color: #2A3B5F;
+    justify-content: center;
+    margin: 0 auto;
+    width: 360px;
+    height: 625px;
+
+    overflow-x: hidden;
+
+}
+
+
+
+
+.NonUser {
+    background-image:url('/treepage/img/errorbackgroud.png');
+    background-size: 360px 625px;
+    width: 360px;
+    height: 625px;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
+
+
+
+
+.NonUserNotification {
+    margin: 210px 70px 0px 70px;
+    width: 218px;
+    height: 218px;
+    border: solid 4px #efefef;
+    border-radius: 200px;
+    text-align: center;
+
+}
+
+
+
+.Notice-img {
+    width: 60px;
+    height: 60px;
+    margin: 30px 0 0 0;
+}
+
+.Notice-text {
+    font-family: Noto Sans KR; 
+    font-size: 12px; 
+    font-weight: 500;
+    color: #efefef
+}
+
+.Notice-button{
+    margin: 5px 0 0 0;
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    text-decoration-line: underline;
+    font-family: Noto Sans KR; 
+    font-weight: 500; 
+    background: none;
+    border: 1px solid #efefef;
+    color: #efefefef;
+    font-size: 12px;
+}
+
+
+.sliderbar {
+    display: block;
+    width: 150px;
+    height: 625px;
+    background-color: red;
+    position: absolute;
+    transition:all .35s;
+    text-align: center;
+    top: 0;
+    right:0;
+    z-index: 1;
+    right: -150px;
+}
+
+
+.writepopup {
+    position: relative;
+    bottom:0;
+    width: 360px;
+    height: 542px;
+    background-color: rgba(188, 54, 54, 0.95);
+    /* bottom: 0; */
+    bottom: 384px;
+    /* bottom: -462px; */
+    border-radius: 25px 25px 0px 0px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+
+.writepopup-text {
+    text-align: center; 
+    position: relative;
+    font-family: NotoSansKR;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fbf8ee;    
+}
+
+.WriteSenderPopup {
+    margin: 20px 0px 0px 35px;
+    text-align: left;
+}
+
+.input-holder {
+    resize: none;
+    border-style: none;
+    font-family: Noto Sans KR;
+    font-size: 12px;
+    text-indent: 13px;
+    width: 304px;
+    flex-grow: 0;
+    border-radius: 20px;
+    margin-top: 4px;
+    background-color: #fbf8ee;
+}
+
+.write-sender-button {
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #fbf8ee;
+    border-style: none;
+    font-family: NotoSansKR;
+    font-size: 24px;
+    font-weight: 900;
+    color: #2c6e5d;
+    
+}
