@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const syntaxcheck = require('../modules/syntaxcheck');
-const findUser = require('../modules/findUser');
+const findData = require('../modules/findData');
 const saveUserData = require('../modules/saveUserData');
 
 // const { UserData } = require('../server')
@@ -20,7 +20,7 @@ router.post("/", async function (req, res) {
     }
 
     try {
-        const existingUser = await findUser(req.body.id);
+        const existingUser = await findData('id', req.body.id);
         
         if (existingUser) {
             console.log("id가 존재함.")

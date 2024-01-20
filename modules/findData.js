@@ -2,7 +2,7 @@
 const { UserData } = require('../routes/db.js');  // UserData 모델이 정의된 파일의 경로를 적어주세요.
 
 
-module.exports = function findUser(id) {
+module.exports = function findData(key, value) {
     console.log("findUser진행중")
-    return UserData.findOne({ id });
+    return UserData.findOne({ [key]: value});
 };
