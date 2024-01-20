@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const syntaxcheck = require("../modules/syntaxcheck");
-const findData = require("../modules/findData");
+const findUserData = require("../modules/findUserData");
 const generateToken = require("../modules/generateToken");
 const hashCtypto = require("../modules/hashCrypto");
 
@@ -16,7 +16,7 @@ router.post("/", async function (req, res) {
   }
 
   try {
-    const existingUser = await findData('id', req.body.id);
+    const existingUser = await findUserData('id', req.body.id);
 
     if (!existingUser) {
       console.log("id가 존재하지 않음");
