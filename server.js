@@ -2,22 +2,14 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const app = express();
-const { db, UserData } = require('./routes/db');  // db.js를 불러옵니다.
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "/"));
 
 app.use(express.static(path.join(__dirname, "/")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/index.html"));
 });
-
-// const loginRegisterRoutes = require('./routes/login_register');
-// app.use('/LoginRegister', loginRegisterRoutes);
-
 
 app.use(express.static(path.join(__dirname, "/Login-Register/")));
 
@@ -30,15 +22,7 @@ app.get('/register', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
+// 삭제 예정
 app.get("/UserData/:id", (req, res) => {
   app.use(
     "/UserData",
@@ -76,6 +60,8 @@ app.get("/OauthVerification/naver", function (req, res) {
   // return res.status(200).send({token: `${req.email}`, ls: `${req.acess_token}`});
 });
 
+
+// 앱에서 사용할 라우터 연결 
 const OauthverificationRoutes = require('./routes/OauthVerification');
 app.use('/OauthVerification', OauthverificationRoutes);
 
