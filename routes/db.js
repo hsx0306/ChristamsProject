@@ -11,16 +11,16 @@ db.once("open", function () {
   console.log("Connected!");
 });
 
-const userDataSchema = new mongoose.Schema(
-  {
-    id: String,
-    password: String,
-    santaName: String,
-    uniqueid: String,
-  },
-  { versionKey: false }
-);
+// 컬렉션 이름과 스키마를 함수의 인자로 받습니다
 
-const UserData = mongoose.model("UserData", userDataSchema);
+const ConnectDatabase = (collectionName, schemaDefinition) => {
+  if (mongoose.models[collectionName]) {
+    return mongoose.models[collectionName];
+  } else {
+    const schema = new mongoose.Schema(schemaDefinition, { versionKey: false });
+    return mongoose.model(collectionName, schema);
+  }
+}
 
-module.exports = { db, UserData };
+
+module.exports = { db, ConnectDatabase };

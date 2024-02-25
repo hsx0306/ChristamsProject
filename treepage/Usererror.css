@@ -28,13 +28,14 @@ body {
 
 
 .NonUserNotification {
-    margin: 210px 70px 0px 70px;
+    position: relative;
+    margin: 160px 70px 0px 70px;
     width: 218px;
     height: 218px;
     border: solid 4px #efefef;
     border-radius: 200px;
     text-align: center;
-
+    z-index: 2;
 }
 
 
@@ -53,19 +54,28 @@ body {
 }
 
 .Notice-button{
-    margin: 5px 0 0 0;
+    margin: 20px 0 0 0;
     width: 100px;
     height: 30px;
     border-radius: 15px;
     text-decoration-line: underline;
     font-family: Noto Sans KR; 
-    font-weight: 500; 
+    font-weight: 900; 
     background: none;
     border: 1px solid #efefef;
     color: #efefefef;
     font-size: 12px;
+    transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+    cursor: pointer;
+
 }
 
+.Notice-button:hover {
+    background: #efefef;
+    color: #2f2f2f;
+    transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+    cursor: pointer;
+}
 
 .sliderbar {
     display: block;
@@ -88,19 +98,20 @@ body {
     width: 360px;
     height: 542px;
     background-color: rgba(188, 54, 54, 0.95);
-    /* bottom: 0; */
-    bottom: 384px;
-    /* bottom: -462px; */
+    bottom: -100px;
+    /* bottom: 384px; */
     border-radius: 25px 25px 0px 0px;
     padding-top: 20px;
     text-align: center;
+    transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+
 }
 
 
 .writepopup-text {
     text-align: center; 
     position: relative;
-    font-family: NotoSansKR;
+    font-family: Noto Sans KR;
     font-size: 24px;
     font-weight: 900;
     color: #fbf8ee;    

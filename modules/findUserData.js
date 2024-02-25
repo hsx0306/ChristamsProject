@@ -1,8 +1,20 @@
-// const UserData = require('../server.js');  // UserData 모델이 정의된 파일의 경로를 적어주세요.
-const { UserData } = require('../routes/db.js');  // UserData 모델이 정의된 파일의 경로를 적어주세요.
+const { ConnectDatabase } = require('../routes/db.js');
+
+const userDataSchema = {
+  id: String,
+  password: String,
+  santaName: String,
+  uniqueid: String,
+};
+
+const UserData = ConnectDatabase('userdatas', userDataSchema);  // 'userdatas' 컬렉션에 연결된 모델 생성
+
+const userLatterSchema = {
+    
+}
 
 
 module.exports = function findUserData(key, value) {
-    console.log("findUser진행중")
+    console.log(`입력받은 ${value}을 DB : ${key} 항목에서 찾는 중`)
     return UserData.findOne({ [key]: value});
 };

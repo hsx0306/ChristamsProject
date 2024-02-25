@@ -38,7 +38,7 @@
                 <span style="display: none;"class="Warning-text-password Warning-text">*비밀번호 형식이 올바르지 않습니다.</span><br>
             </div>
 
-            <div class="register"> <a href="/LoginRegister/register">산타등록하러가기</a></div><br>
+            <div class="register"> <a href="/register">산타등록하러가기</a></div><br>
 
             <div style="display: none;"class="Warning-login">ID 또는 Password가 올바르지 않습니다.<br>확인후 다시 시도해주십시오.</div><br>
 
@@ -78,10 +78,11 @@
                             }
                             // Loginerror
 
-                            if((error === 'SearchError') || (error === 'Loginerror')){
+                            if((error === 'SearchError') || (error === 'Loginerror') || (error == 'useiderror')){
                                 $(".Warning-login").show();
                             }
 
+                            // useiderror
                         }
 
                     });
@@ -102,7 +103,7 @@
             <li class="naver" id="naverLogin">
                 <div id="naver_id_login" style="display:none;"></div>
                 <div class="Elipse">
-                <img class="Elipse" src="/LoginRegister/login-img/naver_icon.png" alt="">
+                <img class="Elipse" src="/Login-Register/login-img/naver_icon.png" alt="">
 
                 <span class="direct-span">네이버</span>
                 </div>

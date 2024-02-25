@@ -15,8 +15,29 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/index.html"));
 });
 
-const loginRegisterRoutes = require('./routes/login_register');
-app.use('/LoginRegister', loginRegisterRoutes);
+// const loginRegisterRoutes = require('./routes/login_register');
+// app.use('/LoginRegister', loginRegisterRoutes);
+
+
+app.use(express.static(path.join(__dirname, "/Login-Register/")));
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, "/Login-Register/login.html"));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, "/Login-Register/register.html"));
+});
+
+
+
+
+
+
+
+
+
+
 
 app.get("/UserData/:id", (req, res) => {
   app.use(
@@ -63,4 +84,28 @@ app.use('/register', registerRoutes);
 
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
+});
+
+
+
+
+app.get("/treepage/:uniqueid", async (req, res) => {
+  
+  // id정보를 통한 user 데이터 체크
+    // 데이터가 있으면 데이터페이지 // 데이터가 없으면 에러페이지로제작
+  const findUserData = require('./modules/findUserData');
+  const existinguniqueid = await findUserData('uniqueid', req.params.uniqueid);
+
+
+  if(existinguniqueid) {
+    console.log("User가 존재합니다.")
+    console.log(existinguniqueid)
+  }
+
+  else if (!existinguniqueid) {
+    console.log("User가 존재하지 않습니다.")
+    res.sendFile(path.join(__dirname, "treepage/Usererror.html"));
+  }
+
+
 });

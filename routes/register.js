@@ -15,16 +15,22 @@ router.post("/", async function (req, res) {
     const vaild = await syntaxcheck(req.body);
     console.log(vaild.valid)
     if(!(vaild.valid)) {
-        console.log(`${vaild.error}로 인한 처리 불가`)
-        return res.status(400).send(vaild.error);
+        console.log(`${vaild.error}-syntax로 인한 처리 불가`)
+        return res.status(400).send(`${vaild.error}-syntax`);
     }
 
     try {
         const existingUser = await findUserData('id', req.body.id);
-        
+        const existinguniqueid = await findUserData('uniqueid', req.body.uniqueid);
+
         if (existingUser) {
             console.log("id가 존재함.")
-            return res.status(400).send('useiderror');
+            return res.status(400).send('existingUsererror');
+        }
+        
+        if (existinguniqueid) {
+            console.log("uniqueid가 존재함.")
+            return res.status(400).send('existing-uniqueid-error');
         }
 
         const savedData = await saveUserData(req.body);

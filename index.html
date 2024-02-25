@@ -9,15 +9,21 @@
     <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"/>
     <link rel="stylesheet" href="index.css">
     <title>산타가되어보자!</title>
+
 </head>
 <body>
     <div class="main">
-    
-    <span>산타가되기></span>
-    <div class="gradient" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, #000);">
-        <img src="/index.png" alt="메인이미지" style="width: 360; height: 625; ">
-    </div>
-    
+        <div class="image-container">
+            <img src="/index.png" alt="메인이미지">
+            <div class="overlay"></div>
+            <span class="text" style=cursor:hand onClick="location.href='/login'">산타가되기 ><br></span>
+            
+        </div>
+        
+        <footer>
+            <span style="font-size: 12px; line-height: 10px;">모바일 전용으로 제작되었습니다 <br> <p style="line-height:-10px">Chrome Safari 지원</p></span>
+        </footer>
+        
     </div>
 </body>
 </html>

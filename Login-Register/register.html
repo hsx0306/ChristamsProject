@@ -25,70 +25,32 @@
             <div class="container">
                 <span class="holder-text">이메일주소<span style="color: #FF5353;">*</span> </span><br>
                 <input name="id" type="text" class="input-holder" placeholder="이메일주소"><br>
-                <span style="display: none;" class="Warning-text Warning-text-email">*이메일 형식이 올바르지 않습니다.</span><br>
+                <span style="display: none;" class="Warning-text Warning-text-email">*이메일 형식이 올바르지 않습니다.</span>
+                <span class="Warning-text Warning-text-existingUser" style="display: none">*이미 존재하는 ID입니다.</span>
             </div>
 
             
             <div class="container">
                 <span  class="holder-text">비밀번호<span style="color: #FF5353;">*</span> </span><br>
-                <input name="password" type="text" class="input-holder" placeholder="비밀번호는 특수문자 포함 8자 이상이여야 합니다."><br>
-                <span style="display: none;" class="Warning-text Warning-text-password">*비밀번호는 특수문자 포함 8자 이상이여야 합니다.</span><br>
+                <input name="password" type="text" class="input-holder" placeholder="비밀번호는 특수문자 포함 8자 이상이여야 합니다.">
+                <span style="display: none;" class="Warning-text Warning-text-password">*비밀번호는 특수문자 포함 8자 이상이여야 합니다.</span>
             </div>
 
             <div class="unique-and-santa-name container">
                 
                 <div class="division">
                     <span  class="holder-text">고유ID<span style="color: #FF5353;">*</span> </span><br>
-                    <input name="uniqueid" type="text" class="input-holder" placeholder="최대 8자리 숫자, 영어" style="width: 140px;"><br>
-                    <!-- <span class="Warning-text" style="">*최대 6자리 숫자,영어만 가능.</span> -->
+                    <input name="uniqueid" type="text" class="input-holder" placeholder="최대 16자리 숫자, 영어" style="width: 150px;"><br>
+                    <span class="Warning-text Warning-text-existing-uniqueiderror-syntax" style="display: none">*형식이 올바르지 않습니다.</span>
+                    <span class="Warning-text Warning-text-existing-uniqueid" style="display: none">*이미 존재하는 ID입니다.</span>
                 </div>
 
                 <div class="division">
                     <span class="holder-text" style="margin: 0 0 0 26px;">산타이름<span style="color: #FF5353;">*</span> </span><br>
-                    <input name="santaName" type="text" class="input-holder" placeholder="최대 3글자 한글" style="width: 140px; margin: 0 0 0 10px"><br>
+                    <input name="santaName" type="text" class="input-holder" placeholder="닉네임을 입력해주세요" style="width: 150px; margin: 0 0 0 10px"><br>
                 </div>
 
             </div>
-          
-            <script>
-
-                $('#registerForm').on('submit', function(e) {
-                    e.preventDefault();
-
-                    $.ajax({
-                        url: '/register',
-                        type: 'POST',
-                        data: $(this).serialize(),
-                        success: function(res) {
-                            window.location.href = "/success";
-                                             
-                        },
-
-                        error: function(xhr) {
-                            var error = xhr.responseText;
-                            if(error === 'emailerror') {
-                                $(".Warning-text-email").show();
-                            }
-                            if(error === 'passworderror') {
-                                $(".Warning-text-password").show();
-                            }
-                            
-                        }
-
-                        // statusCode: {
-                        //     200: function() {
-                        //         console.log('Hello');
-                        //     }
-                        // },
-                    });
-                });
-
-            </script>
-
-
-
-
-            
 
 
 
@@ -132,6 +94,64 @@
                 </script>
 
             </div>
+          
+            <script>
+
+                $('#registerForm').on('submit',  function(e) {
+                    e.preventDefault();
+                    
+                    $.ajax({
+                        
+                        url: '/register',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: function(res) {
+                            window.location.href = "/success";
+                                             
+                        },
+
+                        error: function(xhr) {
+                            var error = xhr.responseText;
+                            if(error === 'emailerror-syntax') {
+                                $(".Warning-text-email").show();
+                            }
+                            if(error === 'passworderror-syntax') {
+                                $(".Warning-text-password").show();
+                            }
+
+                            if(error === 'existingUsererror') {
+                                $(".Warning-text-existingUser").show();
+                            }
+                            if(error === 'existing-uniqueid-error') {
+                                $(".Warning-text-existing-uniqueid").show();
+                            }
+                            if(error === 'uniqueiderror-syntax') {
+                                $(".Warning-text-existing-uniqueiderror-syntax").show();
+                            }
+
+
+                            
+                            
+                        }
+
+                        // statusCode: {
+                        //     200: function() {
+                        //         console.log('Hello');
+                        //     }
+                        // },
+                    });
+                });
+
+            </script>
+
+
+
+
+            
+
+
+
+ 
 
             <div class="container">
                 <button class="register-finish-button" type='submit'>선물주러가기 ></button>
