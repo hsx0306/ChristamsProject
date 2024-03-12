@@ -9,9 +9,9 @@ const userDataSchema = {
 
 const UserData = ConnectDatabase('userdatas', userDataSchema);  // 'userdatas' 컬렉션에 연결된 모델 생성
 
-const userLatterSchema = {
+// const userLatterSchema = {
     
-}
+// }
 
 
 module.exports = function findUserData(key, value) {

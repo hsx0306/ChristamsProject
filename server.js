@@ -7,17 +7,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/")));
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.sendFile(path.join(__dirname, "/index.html"));
 });
 
 app.use(express.static(path.join(__dirname, "/Login-Register/")));
 
-app.get('/login', (req, res) => {
+app.get('/login', (_, res) => {
     res.sendFile(path.join(__dirname, "/Login-Register/login.html"));
 });
 
-app.get('/register', (req, res) => {
+app.get('/register', (_, res) => {
     res.sendFile(path.join(__dirname, "/Login-Register/register.html"));
 });
 
