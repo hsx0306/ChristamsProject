@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
 
 module.exports = function generateToken(id) {
-    const secretKey = "@l9_hsx";
+    const secretKey = process.env.secretKey;
     const option = {
         algorithm: "HS256", // 해싱 알고리즘
         expiresIn: "1h", // 토큰 유효 기간

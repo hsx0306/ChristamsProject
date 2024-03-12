@@ -78,7 +78,7 @@ app.listen(3000, () => {
 app.get("/treepage/:uniqueid", async (req, res) => {
   
   // id정보를 통한 user 데이터 체크
-    // 데이터가 있으면 데이터페이지 // 데이터가 없으면 에러페이지로제작
+  // 데이터가 있으면 데이터페이지 // 데이터가 없으면 에러페이지로제작
   const findUserData = require('./modules/findUserData');
   const existinguniqueid = await findUserData('uniqueid', req.params.uniqueid);
 
