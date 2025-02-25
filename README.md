@@ -37,6 +37,15 @@ npm start
 ```
 
 ---
+## 기술스택
+- Backend: Node.js, Express
+- Frontend: HTML, CSS, JavaScript (정적 파일 제공)
+- Database: MongoDB (데이터 저장 및 조회)
+- OAuth: 네이버 로그인 연동 (OauthVerification)
+- Template Engine: EJS (일부 데이터 렌더링 testing용이라 제거됨.)
+- Routing: Express Router (routes 폴더에서 모듈화)
+- File System: fs 모듈 (일부 JSON 데이터 처리)
 
+---
 ## 📜 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다.
